@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>GameSage</title>
+    <! -- Load Google font -->
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:300' rel='stylesheet' type='text/css'>
+    <! -- Load favicon and other icons -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename = 'favicon.ico') }}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename = 'apple-touch-icon.png') }}" />
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename = 'apple-touch-icon-57x57.png') }}" />
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename = 'apple-touch-icon-72x72.png') }}" />
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename = 'apple-touch-icon-76x76.png') }}" />
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename = 'apple-touch-icon-114x114.png') }}" />
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename = 'apple-touch-icon-120x120.png') }}" />
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename = 'apple-touch-icon-144x144.png') }}" />
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename = 'apple-touch-icon-152x152.png') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename = 'favicon.ico') }}" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename = 'apple-touch-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename = 'apple-touch-icon-60x60.png') }}" />
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename = 'apple-touch-icon-72x72.png') }}" />
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename = 'apple-touch-icon-76x76.png') }}" />
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename = 'apple-touch-icon-114x114.png') }}" />
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename = 'apple-touch-icon-120x120.png') }}" />
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename = 'apple-touch-icon-144x144.png') }}" />
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename = 'apple-touch-icon-152x152.png') }}" />
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename = 'apple-touch-icon-180x180.png') }}" />
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename = 'favicon-16x16.png') }}" sizes="16x16">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename = 'favicon-32x32.png') }}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename = 'favicon-96x96.png') }}" sizes="96x96">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename = 'android-chrome-192x192.png') }}" sizes="192x192">
+    <meta name="msapplication-square70x70logo" content="{{ url_for('static', filename = 'smalltile.png') }}" />
+    <meta name="msapplication-square150x150logo" content="{{ url_for('static', filename = 'mediumtile.png') }}" />
+    <meta name="msapplication-wide310x150logo" content="{{ url_for('static', filename = 'widetile.png') }}" />
+    <meta name="msapplication-square310x310logo" content="{{ url_for('static', filename = 'largetile.png') }}" />
+    <! -- Load jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <style>
+      .prompt {
+        /*background-color: lightgray;*/
+        font-family: 'Josefin Sans', sans-serif;
+        font-size: 48px;
+        text-align: center;
+        width: 80%;
+      }
+      .gameSageImage {
+        font-family: 'Josefin Sans', sans-serif;
+        font-size: 48px;
+        text-align: center;
+        padding-top: 5px;
+      }
+      textarea {
+        font-family: 'Josefin Sans', sans-serif;
+        font-size: 28px;
+        color: black;
+        background-color: #EEEEEE;
+        <!--background-color: #7EE6D4;-->
+        border-color: white;
+        border-style: solid;
+        border-width: 0px;
+        width: 85%;
+        height: 180px;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body><center>
+  <div class=prompt id="prompt">
+    I am GameSage.<br>Type in a game idea, then click on me to tell me it.
+  </div>
+    <form name="gameNetForm" method="post" action="http://gamecip-projects.soe.ucsc.edu/gamenet/game_idea">
+      <input type="hidden" name="user_submitted_text" value="">
+      <input type="hidden" name="most_related_games_str" value="gameNetQuery.most_related_games_str">
+      <input type="hidden" name="least_related_games_str" value="gameNetQuery.least_related_games_str">
+    </form>
+  <div class="gameSageImage"><img onclick="getUserSubmittedText()" src="{{ url_for('static', filename = 'the_gamesage.png') }}" alt="" id="gameSageImage" style="height:350px"><br></div>
+  <br>
+  <textarea type="text" id="userSubmittedText" value=""></textarea>
+  <br><br>
+  <script>
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    function goToGeneratedGameNetEntry(gameNetQuery) {
+      // Update the form that we will use to store the data
+      // that GameNet needs to generate an entry for this game idea
+      formObject = document.forms['gameNetForm'];
+      formObject.elements["user_submitted_text"].value = gameNetQuery.user_submitted_text;
+      formObject.elements["most_related_games_str"].value = gameNetQuery.most_related_games_str;
+      formObject.elements["least_related_games_str"].value = gameNetQuery.least_related_games_str;
+      // Submit the updated form via POST
+      formObject.submit();
+    }
+    function getUserSubmittedText() {
+        var submittedText = document.getElementById("userSubmittedText").value;
+        // remove all question marks from the submitted text -- these apparently
+        // screw up the GET url
+        submittedText = submittedText.replace(/\?/g,'.');
+        // change the prompt text
+        document.getElementById("prompt").innerHTML = 'Hmm, this is a good idea.<br>Let me think for a moment.';
+        // fade out the prompt text
+        // $(".prompt").fadeOut();
+        // change the GameSage to the thinking image
+        document.getElementById("gameSageImage").src = "{{ url_for('static', filename = 'the_gamesage_thinking.png') }}";
+        // Get JSON of generated GameNet query back from Flask
+        queryToSendToFlask = '/submittedText=' + submittedText;
+        $.getJSON($SCRIPT_ROOT + queryToSendToFlask, {}, function(data) {
+           goToGeneratedGameNetEntry(mostRelatedGame=data);
+        });
+    }
+  </script>
+</center>
+</body>
+</html>
