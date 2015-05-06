@@ -1,0 +1,281 @@
+1292 Advanced Programmable Video System
+3DO Interactive Multiplayer
+Acorn 32 bit
+Acorn Electron
+Action Max
+Advanced Pico Beena
+Adventure Vision
+Altair MITS 8800
+Amazon Fire TV
+Amiga AGA
+Amiga CD32
+Amiga ECS
+Amiga OCS
+Amiga ST
+Amstrad CPC
+Amstrad GX4000
+Amstrad Mega PC
+Amstrad PCW
+APF Imagination Machine
+APF TV Fun
+Apple Bandai Pippin
+Apple II
+Apple IIe
+Apple IIGS
+Apple Pippin
+Arcadia 2001
+Atari 400
+Atari 800
+Atari 2600
+Atari VCS
+Atari Video Computer System
+Atari 2600 Jr.
+Atari 2800
+Sears Video Arcade II
+Atari 5100
+Atari 5200 Jr.
+Atari 5200
+Atari 7800
+Atari Falcon
+Atari Flashback
+Atari Flashback 2
+Atari Flashback 3
+Atari Flashback 4
+Atari Game Brain
+Atari Jaguar
+Atari Jaguar CD
+Atari Jaguar II
+Atari Lynx
+Atari Mirai
+Atari Panther
+Stunt Cycle
+Atari Transputer Workstation
+Atari XEGS
+Bally Astrocade
+Bandai Super Vision 8000
+BBC Bridge Companion
+BBC Micro
+BBS Door
+Binatone TV Master Mk IV
+Bitcorp Gamate
+BSS 01
+C1 NES TV
+Sharp Nintendo Television
+Casio Loopy
+Casio PV 1000
+Chip 8
+Coleco Gemini
+Color TV Game 15
+Color TV Game 6
+Color TV Game Block Breaker
+Color TV Game Racing112
+Colorsport VIII
+Commodore 128
+Commodore 16
+Commodore 64
+Commodore 64GS
+Commodore CDTV
+Commodore PET
+CPS Changer
+DEC PDP 1
+DVD player
+EACA EG2000 Colour Genie
+Eedoo CT510
+Elliott 903
+Emerson Arcadia 2001
+Entex Adventure Vision
+Epoc Cassette Vision
+Epoch Game Pocket Computer
+Epoch Super Cassette Vision
+EVO Smart Console
+EXL 100
+Fairchild Channel F
+Fairchild Channel F System II
+Family Computer Disk System
+FC 16 Go
+FC Twin
+FM Towns
+Fujitsu FM Towns Marty
+Gakken Compact Vision
+Game & Watch
+Game Boy
+Game Boy Advance
+Game Boy Color
+GameKing I
+GameKing II
+GameKing III
+Game Park 32
+Game Wave Family Entertainment System
+Game Master
+HP 48
+Huawei Tron
+Intellivision II
+VC 4000
+iQue Player
+Robotron KC 85
+Robotron KC 87
+Konix Multi System
+Leapfrog Didj
+Leapster Explorer
+Magnavox Odyssey
+Magnavox Odyssey²
+Magnavox Odyssey Dedicated Series
+Magnovox Odyssey³
+Videopac G7400
+Master System
+Sega Mark III
+Mattel Aquarius
+Mattel HyperScan
+Mega Duck
+Memorex MD 2500 VIS
+Microprofessor II
+Mobile phone
+MoMA Eve
+MSX 2
+My Vision
+NEC PC 6001
+NEC PC 8801
+NEC PC 9801
+NEC PC Engine SuperGrafx
+Neo Geo AES
+Neo Geo MVS
+Neo Geo Pocket
+Neo Geo Pocket Color
+Neo Geo CD
+Neo Geo CDZ
+Neo Geo X
+NES 101
+AV Famicom
+Net Yaroze
+Nintendo AVS
+Nintendo 3DS
+Nintendo 3DS eShop
+Nintendo 64
+Nintendo 64DD
+Nintendo DS
+Nintendo DSi
+Nintendo Entertainment System
+Nintendo Game Boy Player
+Nintendo GameCube
+Nintendo Mini Classics
+Nvidia Shield
+Olympian 2600
+Palm OS Classic
+Panasonic M2
+Panasonic Q
+Panasonic Q Game Boy Player
+PC Booter
+PC Engine
+TurboGrafx 16
+PC Engine CD
+TurboGrafx CD
+PC Engine2
+PC Engine SuperGrafx
+Philips CD i
+Philips Odyssey
+Philips Videopac+ G7400
+Philips VG5000µ
+Playstation Network
+PlayStation 2
+PlayStation 3
+PlayStation 4
+PlayStation Network
+PlayStation Portable
+PlayStation Vita
+PlayStation Vita TV
+Pocket Dream Console
+Pokemon mini
+PSP Go
+Radio Shack TV Scoreboard
+Razer Switchblade
+RCA Studio II
+RDI Halcyon
+Retro Duo
+SAM Coupé
+Sear Tele Games
+Sega CD
+Mega CD
+Sega Firecore
+Sega Game Gear
+Sega Master System
+Sega Mega Drive
+Sega Genesis
+Sega Mega Drive 32X
+Sega Genesis 32X
+Sega Multi Mega
+Sega Neptune
+Sega Pico
+Sega Pluto
+Sega Saturn
+Sega SG 1000
+Sega TeraDrive
+Sega Zone
+SF 1 SNES TV
+Sharp MZ
+Sharp MZ 700
+Sharp X1
+Sharp X1 Turbo Z
+Sharp X68000
+Sinclair QL
+SNES 2
+Super Famicom Jr.
+Sony Ericsson Xperia PLAY
+Sony PSX DVR
+Sord M5
+Sportsman T101
+Steam Machine
+Super A'Can
+Super Cassette Vision
+Super Micro
+Super Micro PVS
+Super Nintendo Entertainment System
+Super Famicom
+Supervision 8000
+Taito WoWoW
+Tandy Color
+Tandy VIS
+Tandy Zoomer
+Tapwave Zodiac
+Telegames Personal Arcade
+Terminator 2
+Texas Instruments Calculators
+Thompson To
+TI 99
+Tiger Game.COM
+Tiger R Zone
+Tomy Pyuuta Jr.
+Tournament 100
+Tournament 1000
+Tournament 102
+Tournament 150
+Tournament 200
+Tournament 2000
+Tournament 2501
+TRS 80 CoCo
+PC Engine Duo
+PC Engine GT
+TurboGrafx 16
+PC Engine
+Twin Famicom
+Ultravision VAS
+VC 4000
+Victor Wondermega
+Video Pinball
+Virtual Boy
+Vtech Creativision
+Watara Supervision
+Wii Shop
+Wii U
+Windows 3.1
+Windows 3.x
+Windows CE
+Windows Mobile
+Windows Phone
+WonderSwan Color
+Xbox 360
+Xbox 360 Games Store
+Xbox One
+Xi3 Piston
+ZX 81
+ZX Spectrum
+ZX Spectrum 128
