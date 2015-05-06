@@ -173,7 +173,7 @@ class GameSage(object):
     @staticmethod
     def _remove_stopwords(text):
         """Remove all stopwords from the text."""
-        f = open('/stopwords.txt', 'r')
+        f = open('/static/stopwords.txt', 'r')
         stopwords = f.readlines()
         stopwords = (stopword.strip('\n') for stopword in stopwords)
         tokens = [token.lower() for token in text.split()]
