@@ -9,13 +9,14 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
+    """Render the GameSage homepage."""
     return render_template('index.html')
 
 
 @app.route('/submittedText=<user_submitted_text>')
 def generate_gamenet_query(user_submitted_text):
+    """Generate a query for GameNet."""
     gamesage = GameSage(database=app.database, user_submitted_text=user_submitted_text)
-    print user_submitted_text
     return jsonify(
         user_submitted_text=user_submitted_text,
         most_related_games_str=gamesage.most_related_games_str,
