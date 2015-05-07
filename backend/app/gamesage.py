@@ -70,21 +70,21 @@ class GameSage(object):
     @staticmethod
     def _load_term_id_dictionary():
         """Load the term-ID dictionary for our corpus."""
-        term_id_dictionary = gensim.corpora.Dictionary.load('/static/id2term.dict')
+        term_id_dictionary = gensim.corpora.Dictionary.load('./static/id2term.dict')
         return term_id_dictionary
 
     @staticmethod
     def _load_tf_idf_model():
         """Load our tf-idf model."""
         tf_idf_model = (
-            gensim.models.TfidfModel.load('/static/wiki_games_tfidf_model')
+            gensim.models.TfidfModel.load('./static/wiki_games_tfidf_model')
         )
         return tf_idf_model
 
     @staticmethod
     def _load_lsa_model():
         """Load our LSA model."""
-        lsa_model = gensim.models.LsiModel.load('/static/model_207.lsi')
+        lsa_model = gensim.models.LsiModel.load('./static/model_207.lsi')
         return lsa_model
 
     def _preprocess_text(self, text):
@@ -142,7 +142,7 @@ class GameSage(object):
     @staticmethod
     def _tokenize_multiword_platform_names(text):
         """Tokenize occurrences of multiword platform names."""
-        f = open('/static/multiword_platform_names.txt', 'r')
+        f = open('./static/multiword_platform_names.txt', 'r')
         multiword_platform_names = f.readlines()
         multiword_platform_names = [name.strip('\n') for name in multiword_platform_names]
         multiword_platform_names = [name.lower() for name in multiword_platform_names]
@@ -173,7 +173,7 @@ class GameSage(object):
     @staticmethod
     def _remove_stopwords(text):
         """Remove all stopwords from the text."""
-        f = open('/static/stopwords.txt', 'r')
+        f = open('./static/stopwords.txt', 'r')
         stopwords = f.readlines()
         stopwords = (stopword.strip('\n') for stopword in stopwords)
         tokens = [token.lower() for token in text.split()]
