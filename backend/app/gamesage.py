@@ -4,7 +4,7 @@ from nltk import WordNetLemmatizer
 
 
 class GameSage(object):
-    """An anthropomorphization of the procedure in LSA of folding in."""
+    """An anthropomorphization of the procedure in LSA called 'folding in'."""
 
     def __init__(self, database, user_submitted_text):
         """Initialize a GameSage object."""
