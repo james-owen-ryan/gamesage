@@ -8,7 +8,6 @@ class GameSage(object):
 
     def __init__(self, database, user_submitted_text):
         """Initialize a GameSage object."""
-        print user_submitted_text
         self.database = database
         preprocessed_text = self._preprocess_text(text=user_submitted_text)
         self.term_id_dictionary = self._load_term_id_dictionary()
