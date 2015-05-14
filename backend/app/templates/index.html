@@ -100,9 +100,10 @@
         // $(".prompt").fadeOut();
         // change the GameSage to the thinking image
         document.getElementById("gameSageImage").src = "{{ url_for('static', filename = 'the_gamesage_thinking.png') }}";
-        // Get JSON of generated GameNet query back from Flask (do this by
-        // submitting a form with the user's submitted game idea via POST)
-        $.post("/submittedText", { user_submitted_text : submittedText }, function(data) {
+        // Get JSON of generated GameNet query back from Flask (do this by submitting a form with
+        // the user's submitted game idea via POST) [this url needs to be changed to /submittedText to test
+        // this app locally]
+        $.post("/gamesage/submittedText", { user_submitted_text : submittedText }, function(data) {
             goToGeneratedGameNetEntry(mostRelatedGame=data);
         }, "json");
         // [Originally, this was done via GET using this block]
