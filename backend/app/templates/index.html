@@ -94,23 +94,39 @@
     }
     function getUserSubmittedText() {
         var submittedText = document.getElementById("userSubmittedText").value;
-        // change the prompt text
-        document.getElementById("prompt").innerHTML = 'Hmm, this is a good idea.<br>Let me think for a moment.';
-        // fade out the prompt text
-        // $(".prompt").fadeOut();
-        // change the GameSage to the thinking image
-        document.getElementById("gameSageImage").src = "{{ url_for('static', filename = 'the_gamesage_thinking.png') }}";
-        // Get JSON of generated GameNet query back from Flask (do this by submitting a form with
-        // the user's submitted game idea via POST) [this url needs to be changed to /submittedText to test
-        // this app locally]
-        $.post("/gamesage/submittedText", { user_submitted_text : submittedText }, function(data) {
+        if (submittedText.length > 500) {
+          // Change the prompt text
+          document.getElementById("prompt").innerHTML = 'Hmm, this is a good idea.<br>Let me think for a moment.';
+          // [Use this to fade out the prompt text]
+          // $(".prompt").fadeOut();
+          // change the GameSage to the thinking image
+          document.getElementById("gameSageImage").src = "{{ url_for('static', filename = 'the_gamesage_thinking.png') }}";
+          // Get JSON of generated GameNet query back from Flask (do this by submitting a form with
+          // the user's submitted game idea via POST) [this url needs to be changed to /submittedText to test
+          // this app locally]
+          $.post("/gamesage/submittedText", { user_submitted_text : submittedText }, function(data) {
             goToGeneratedGameNetEntry(mostRelatedGame=data);
-        }, "json");
-        // [Originally, this was done via GET using this block]
-        // queryToSendToFlask = '/submittedText=' + submittedText;
-        // $.getJSON($SCRIPT_ROOT + queryToSendToFlask, {}, function(data) {
-        //    goToGeneratedGameNetEntry(mostRelatedGame=data);
-        // });
+          }, "json");
+          // [Originally, this was done via GET using this block]
+          // queryToSendToFlask = '/submittedText=' + submittedText;
+          // $.getJSON($SCRIPT_ROOT + queryToSendToFlask, {}, function(data) {
+          //    goToGeneratedGameNetEntry(mostRelatedGame=data);
+          // });
+        }
+        else {
+          // Change the prompt text
+          if (document.getElementById("prompt").innerHTML ==
+              'I will need you to write a little more<br>than that, please.') {
+            document.getElementById("prompt").innerHTML = 'Please, write at least 500 characters before<br>telling me your idea.';
+          }
+          else if (document.getElementById("prompt").innerHTML ==
+              'Hmm, this is starting to sound good,<br>but could you tell me more?') {
+            document.getElementById("prompt").innerHTML = 'I will need you to write a little more<br>than that, please.';
+          }
+          else {
+            document.getElementById("prompt").innerHTML = 'Hmm, this is starting to sound good,<br>but could you tell me more?';
+          }
+        }
     }
   </script>
 </center>
