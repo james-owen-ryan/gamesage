@@ -1,5 +1,5 @@
 import csv
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from gamesage import GameSage
 from game import Game
 
@@ -13,9 +13,20 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/submittedText=<user_submitted_text>')
-def generate_gamenet_query(user_submitted_text):
+# @app.route('/submittedText=<user_submitted_text>')
+# def generate_gamenet_query(user_submitted_text):
+#     """Generate a query for GameNet."""
+#     gamesage = GameSage(database=app.database, user_submitted_text=user_submitted_text)
+#     return jsonify(
+#         user_submitted_text=user_submitted_text,
+#         most_related_games_str=gamesage.most_related_games_str,
+#         least_related_games_str=gamesage.least_related_games_str
+#     )
+
+@app.route('/submittedText', methods=['POST'])
+def generate_gamenet_query():
     """Generate a query for GameNet."""
+    user_submitted_text = request.form['user_submitted_text']
     gamesage = GameSage(database=app.database, user_submitted_text=user_submitted_text)
     return jsonify(
         user_submitted_text=user_submitted_text,

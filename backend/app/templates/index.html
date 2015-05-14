@@ -70,6 +70,7 @@
   <div class=prompt id="prompt">
     I am GameSage.<br>Type in a game idea, then click on me to tell me it.
   </div>
+    <!-- Prepare form that will be sent via POST to GameNet to generate an entry -->
     <form name="gameNetForm" method="post" action="http://gamecip-projects.soe.ucsc.edu/gamenet/game_idea">
       <input type="hidden" name="user_submitted_text" value="">
       <input type="hidden" name="most_related_games_str" value="gameNetQuery.most_related_games_str">
@@ -93,20 +94,22 @@
     }
     function getUserSubmittedText() {
         var submittedText = document.getElementById("userSubmittedText").value;
-        // remove all question marks from the submitted text -- these apparently
-        // screw up the GET url
-        submittedText = submittedText.replace(/\?/g,'.');
         // change the prompt text
         document.getElementById("prompt").innerHTML = 'Hmm, this is a good idea.<br>Let me think for a moment.';
         // fade out the prompt text
         // $(".prompt").fadeOut();
         // change the GameSage to the thinking image
         document.getElementById("gameSageImage").src = "{{ url_for('static', filename = 'the_gamesage_thinking.png') }}";
-        // Get JSON of generated GameNet query back from Flask
-        queryToSendToFlask = '/submittedText=' + submittedText;
-        $.getJSON($SCRIPT_ROOT + queryToSendToFlask, {}, function(data) {
-           goToGeneratedGameNetEntry(mostRelatedGame=data);
-        });
+        // Get JSON of generated GameNet query back from Flask (do this by
+        // submitting a form with the user's submitted game idea via POST)
+        $.post("/submittedText", { user_submitted_text : submittedText }, function(data) {
+            goToGeneratedGameNetEntry(mostRelatedGame=data);
+        }, "json");
+        // [Originally, this was done via GET using this block]
+        // queryToSendToFlask = '/submittedText=' + submittedText;
+        // $.getJSON($SCRIPT_ROOT + queryToSendToFlask, {}, function(data) {
+        //    goToGeneratedGameNetEntry(mostRelatedGame=data);
+        // });
     }
   </script>
 </center>
