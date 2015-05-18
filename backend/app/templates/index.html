@@ -164,11 +164,10 @@
             document.getElementById("prompt").innerHTML = PROMPTS[currentFacet];
             // Time to submit
             if (currentFacet == "DONE") {
-              alert(submittedText);
-              // Remove the text-input box
-              document.getElementById("textBox").innerHTML = "";
               // Change the GameSage to the thinking image
               document.getElementById("gameSageImage").src = "{{ url_for('static', filename = 'the_gamesage_thinking.png') }}";
+              // Remove the text-input box
+              document.getElementById("textBox").innerHTML = "";
               // Get JSON of generated GameNet query back from Flask (do this by submitting a form with
               // the user's submitted game idea via POST) [this url needs to be changed to /submittedText to test
               // this app locally]
