@@ -42,7 +42,7 @@
         font-family: 'Josefin Sans', sans-serif;
         font-size: 48px;
         text-align: center;
-        width: 80%;
+        width: 85%;
       }
       .gameSageImage {
         font-family: 'Josefin Sans', sans-serif;
@@ -68,7 +68,7 @@
 
   <body><center>
   <div class=prompt id="prompt">
-    I am GameSage.<br>Type in a game idea, then click on me to tell me it.
+    I am GameSage.<br><br>
   </div>
     <!-- Prepare form that will be sent via POST to GameNet to generate an entry -->
     <form name="gameNetForm" method="post" action="http://gamecip-projects.soe.ucsc.edu/gamenet/game_idea">
@@ -78,10 +78,50 @@
     </form>
   <div class="gameSageImage"><img onclick="getUserSubmittedText()" src="{{ url_for('static', filename = 'the_gamesage.png') }}" alt="" id="gameSageImage" style="height:350px"><br></div>
   <br>
-  <textarea type="text" id="userSubmittedText" value=""></textarea>
+  <div class=prompt id="textBox">
+      I will ask you a series of questions about your game idea. Please write in complete sentences and be as specific
+      as you can.<br><br>Click me when you are ready to begin.
+  </div>
   <br><br>
   <script>
     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    var submittedText = "";
+    var currentFacet = "";
+    var PROMPTS = {
+      "GENRE": "Tell me a bit about the genre of your game. Click me<br>once you've finished writing.<br>",
+      "SETTING": "Now tell me about the setting that your game takes place in.<br>Be as specific as you can and write in complete sentences.",
+      "PLOT": "Next, tell me about the narrative or plot of your game.<br><br>",
+      "GAMEPLAY": "Okay, now tell me about its gameplay.<br><br>",
+      "MECHANICS": "Next, tell me some of the specific actions<br>the player may take in your game.",
+      "VISUALS": "Now, tell me about the visual style of your game.<br><br>",
+      "AESTHETICS": "What other details of your game's aesthetic style<br>are worth mentioning?",
+      "UNIQUE": "Now, what makes your game unique?<br><br>",
+      "OTHER": "Lastly, tell me anything else about your game that<br>you'd like to add.",
+      "DONE": "Okay, that is all I need to know.<br>Now, please, let me think for a moment."
+    };
+    var nextFacet = {
+      "": "GENRE",
+      "GENRE": "SETTING",
+      "SETTING": "PLOT",
+      "PLOT": "GAMEPLAY",
+      "GAMEPLAY": "MECHANICS",
+      "MECHANICS": "VISUALS",
+      "VISUALS": "AESTHETICS",
+      "AESTHETICS": "UNIQUE",
+      "UNIQUE": "OTHER",
+      "OTHER": "DONE"
+    };
+    var facetExpr = {
+      "GENRE": "your game's genre",
+      "SETTING": "your game's setting",
+      "PLOT": "your game's narrative",
+      "GAMEPLAY": "your game's gameplay",
+      "MECHANICS": "specific actions a player may take",
+      "VISUALS": "your game's visual style",
+      "AESTHETICS": "your game's aesthetic style",
+      "UNIQUE": "what makes your game unique",
+      "OTHER": "other notable aspects of your game"
+    };
     function goToGeneratedGameNetEntry(gameNetQuery) {
       // Update the form that we will use to store the data
       // that GameNet needs to generate an entry for this game idea
@@ -93,38 +133,49 @@
       formObject.submit();
     }
     function getUserSubmittedText() {
-        var submittedText = document.getElementById("userSubmittedText").value;
-        if (submittedText.length > 500) {
-          // Change the prompt text
-          document.getElementById("prompt").innerHTML = 'Hmm, this is a good idea.<br>Let me think for a moment.';
-          // [Use this to fade out the prompt text]
-          // $(".prompt").fadeOut();
-          // change the GameSage to the thinking image
-          document.getElementById("gameSageImage").src = "{{ url_for('static', filename = 'the_gamesage_thinking.png') }}";
-          // Get JSON of generated GameNet query back from Flask (do this by submitting a form with
-          // the user's submitted game idea via POST) [this url needs to be changed to /submittedText to test
-          // this app locally]
-          $.post("/gamesage/submittedText", { user_submitted_text : submittedText }, function(data) {
-            goToGeneratedGameNetEntry(mostRelatedGame=data);
-          }, "json");
-          // [Originally, this was done via GET using this block]
-          // queryToSendToFlask = '/submittedText=' + submittedText;
-          // $.getJSON($SCRIPT_ROOT + queryToSendToFlask, {}, function(data) {
-          //    goToGeneratedGameNetEntry(mostRelatedGame=data);
-          // });
+        if (currentFacet == "") {  // Just started
+          // Display the text-input box
+          document.getElementById("textBox").innerHTML = '<textarea type="text" id="userSubmittedText" value=""></textarea>';
+          // Change to the next facet
+          currentFacet = nextFacet[currentFacet];
+          // Change the prompt text according to the new facet
+          document.getElementById("prompt").innerHTML = PROMPTS[currentFacet];
         }
         else {
-          // Change the prompt text
-          if (document.getElementById("prompt").innerHTML ==
-              'I will need you to write a little more<br>than that, please.') {
-            document.getElementById("prompt").innerHTML = 'Please, write at least 500 characters before<br>telling me your idea.';
-          }
-          else if (document.getElementById("prompt").innerHTML ==
-              'Hmm, this is starting to sound good,<br>but could you tell me more?') {
-            document.getElementById("prompt").innerHTML = 'I will need you to write a little more<br>than that, please.';
+          var numCharactersSubmitted = document.getElementById("userSubmittedText").value.length;
+          if (numCharactersSubmitted < 50 && currentFacet != "GENRE") {
+            console.log(numCharactersSubmitted);
+            document.getElementById("prompt").innerHTML = "Please write a little more about<br>" + facetExpr[currentFacet] + '.'
           }
           else {
-            document.getElementById("prompt").innerHTML = 'Hmm, this is starting to sound good,<br>but could you tell me more?';
+            // Append the just-submitted facet description to the full query, which we are
+            // incrementally building up as each new facet description gets submitted
+            if (currentFacet == "GENRE") {
+              submittedText += document.getElementById("userSubmittedText").value;
+            }
+            else {
+              submittedText += ' // ' + document.getElementById("userSubmittedText").value;
+            }
+            // Remove the just-submitted text from the text-input box
+            document.getElementById("textBox").innerHTML = '<textarea type="text" id="userSubmittedText" value=""></textarea>';
+            // Change to the next facet
+            currentFacet = nextFacet[currentFacet];
+            // Change the prompt text according to the new facet
+            document.getElementById("prompt").innerHTML = PROMPTS[currentFacet];
+            // Time to submit
+            if (currentFacet == "DONE") {
+              alert(submittedText);
+              // Remove the text-input box
+              document.getElementById("textBox").innerHTML = "";
+              // Change the GameSage to the thinking image
+              document.getElementById("gameSageImage").src = "{{ url_for('static', filename = 'the_gamesage_thinking.png') }}";
+              // Get JSON of generated GameNet query back from Flask (do this by submitting a form with
+              // the user's submitted game idea via POST) [this url needs to be changed to /submittedText to test
+              // this app locally]
+              $.post("/gamesage/submittedText", { user_submitted_text : submittedText }, function(data) {
+                goToGeneratedGameNetEntry(mostRelatedGame=data);
+              }, "json");
+            }
           }
         }
     }
