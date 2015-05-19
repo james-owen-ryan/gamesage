@@ -9,10 +9,10 @@ class GameSage(object):
     def __init__(self, database, term_id_dictionary, tf_idf_model, lsa_model, user_submitted_text):
         """Initialize a GameSage object."""
         self.database = database
-        preprocessed_text = self._preprocess_text(text=user_submitted_text)
         self.term_id_dictionary = term_id_dictionary
         self.tf_idf_model = tf_idf_model
         self.lsa_model = lsa_model
+        preprocessed_text = self._preprocess_text(text=user_submitted_text)
         lsa_vector_for_user_submitted_text = self._fold_in_user_submitted_text(text=preprocessed_text)
         self.most_related_games, self.least_related_games = self._get_most_related_games_to_user_submitted_text(
             lsa_vector_for_user_submitted_text=lsa_vector_for_user_submitted_text
