@@ -1,4 +1,4 @@
-class Game(object):
+class GameSageGame(object):
     """A game representation for the purposes of GameSage."""
 
     def __init__(self, game_id, title, lsa_vector_str):

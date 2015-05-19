@@ -8,13 +8,13 @@ from game import Game
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/gamesage')
 def home():
     """Render the GameSage homepage."""
-    return render_template('index.html')
+    return render_template('gamesage_index.html')
 
 
-@app.route('/submittedText', methods=['POST'])
+@app.route('/gamesage/submittedText', methods=['POST'])
 def generate_gamenet_query():
     """Generate a query for GameNet."""
     user_submitted_text = request.form['user_submitted_text']
@@ -30,7 +30,7 @@ def generate_gamenet_query():
     )
 
 
-def load_database():
+def load_gamesage_database():
     """Load the database of game representations from a TSV file."""
     database = []
     with open('static/game_lsa_vectors.tsv', 'r') as tsv_file:
@@ -63,13 +63,13 @@ def load_lsa_model():
 
 
 if __name__ == '__main__':
-    app.database = load_database()
+    app.gamesage_database = load_gamesage_database()
     app.term_id_dictionary = load_term_id_dictionary()
     app.tf_idf_model = load_tf_idf_model()
     app.lsa_model = load_lsa_model()
     app.run(debug=False)
 else:
-    app.database = load_database()
+    app.gamesage_database = load_gamesage_database()
     app.term_id_dictionary = load_term_id_dictionary()
     app.tf_idf_model = load_tf_idf_model()
     app.lsa_model = load_lsa_model()
