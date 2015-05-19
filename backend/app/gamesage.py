@@ -6,13 +6,13 @@ from nltk import WordNetLemmatizer
 class GameSage(object):
     """An anthropomorphization of the procedure in LSA called 'folding in'."""
 
-    def __init__(self, database, user_submitted_text):
+    def __init__(self, database, term_id_dictionary, tf_idf_model, lsa_model, user_submitted_text):
         """Initialize a GameSage object."""
         self.database = database
         preprocessed_text = self._preprocess_text(text=user_submitted_text)
-        self.term_id_dictionary = self._load_term_id_dictionary()
-        self.tf_idf_model = self._load_tf_idf_model()
-        self.lsa_model = self._load_lsa_model()
+        self.term_id_dictionary = term_id_dictionary
+        self.tf_idf_model = tf_idf_model
+        self.lsa_model = lsa_model
         lsa_vector_for_user_submitted_text = self._fold_in_user_submitted_text(text=preprocessed_text)
         self.most_related_games, self.least_related_games = self._get_most_related_games_to_user_submitted_text(
             lsa_vector_for_user_submitted_text=lsa_vector_for_user_submitted_text
@@ -65,26 +65,6 @@ class GameSage(object):
         # Exclude first dimension, as we've already done with the existing LSA vectors
         lsa_vector_for_user_submitted_text = document_lsa_vector_for_user_submitted_text[1:]
         return lsa_vector_for_user_submitted_text
-
-    @staticmethod
-    def _load_term_id_dictionary():
-        """Load the term-ID dictionary for our corpus."""
-        term_id_dictionary = gensim.corpora.Dictionary.load('./static/id2term.dict')
-        return term_id_dictionary
-
-    @staticmethod
-    def _load_tf_idf_model():
-        """Load our tf-idf model."""
-        tf_idf_model = (
-            gensim.models.TfidfModel.load('./static/wiki_games_tfidf_model')
-        )
-        return tf_idf_model
-
-    @staticmethod
-    def _load_lsa_model():
-        """Load our LSA model."""
-        lsa_model = gensim.models.LsiModel.load('./static/model_207.lsi')
-        return lsa_model
 
     def _preprocess_text(self, text):
         """Preprocess user-submitted text in the same way we preprocessed our corpus."""
